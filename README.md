@@ -18,8 +18,8 @@ git clone <LINK_REPO_GITHUB_CUA_BAN>
 cd ~/ur_ws
 rosdep update
 rosdep install --ignore-src --from-paths src -y -r
-colcon build --packages-select ur_viet_chu
+colcon build --packages-select control-ur3
 source install/setup.bash
 
-## 3.chạy chương trình
+# chạy chương trình
 ros2 launch ur_viet_chu khoi_dong_viet_chu.launch.py
