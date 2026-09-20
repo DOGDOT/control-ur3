@@ -12,7 +12,7 @@ Clone repository vào thư mục `src` của ROS 2 workspace:
 mkdir -p ~/ur_ws/src
 cd ~/ur_ws/src
 # Clone source code
-git clone <LINK_REPO_GITHUB_CUA_BAN>
+git clone https://github.com/DOGDOT/control-ur3.git
 
 # Cài đặt thư viện phụ thuộc và biên dịch
 cd ~/ur_ws
