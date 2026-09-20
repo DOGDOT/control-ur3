@@ -12,7 +12,7 @@ int main(int argc, char** argv)
 {
   rclcpp::init(argc, argv);
   
-  // Bật use_sim_time để khớp 100% với đồng hồ Gazebo
+  // Đồng bộ time với gazebo
   rclcpp::NodeOptions node_options;
   node_options.automatically_declare_parameters_from_overrides(true);
   node_options.parameter_overrides({{"use_sim_time", true}});
@@ -31,9 +31,9 @@ int main(int argc, char** argv)
   move_group.setMaxVelocityScalingFactor(0.08);     
   move_group.setMaxAccelerationScalingFactor(0.05); 
 
-  RCLCPP_INFO(node->get_logger(), "=== DANG DONG BO DONG HO VOI GAZEBO ===");
+  RCLCPP_INFO(node->get_logger(), "dang dong bo voi gazebo");
 
-  // 1. TƯ THẾ READY AN TOÀN TRÊN CAO (KHUỶU TAY DỰNG ĐỨNG)
+  // setup tư thế bắt đầu an toàn
   std::map<std::string, double> tu_the_ready = {
     {"shoulder_pan_joint", 0.0},
     {"shoulder_lift_joint", -1.57},
@@ -52,11 +52,11 @@ int main(int argc, char** argv)
 
   rclcpp::sleep_for(std::chrono::seconds(1));
 
-  // Lấy vị trí thực tế sau khi đồng bộ
+  // lấy vị trí thực tế
   geometry_msgs::msg::Pose pose_ready = move_group.getCurrentPose().pose;
   geometry_msgs::msg::Quaternion huong_chuan = pose_ready.orientation;
 
-  // 2. THIẾT KẾ QUỸ ĐẠO HÌNH TRÒN TRÊN MẶT PHẲNG ĐỨNG (Y-Z)
+  // thiết kế quỹ đạo trên mặt phẳng (Y-Z)
   const double X_BANG = 0.30;
   const double Y_TAM = 0.0;
   const double Z_TAM = 0.36;
@@ -74,7 +74,7 @@ int main(int argc, char** argv)
     danh_sach_hinh_tron.push_back(p);
   }
 
-  // 3. PHÁT MARKER VÒNG TRÒN ĐỎ TRÊN RVIZ LIÊN TỤC
+  // phát maker vòng tròn đỏ trên rviz để dễ quan sát quỹ đạo
   visualization_msgs::msg::Marker marker;
   marker.header.frame_id = "world";
   marker.ns = "hinh_tron";
@@ -97,7 +97,7 @@ int main(int argc, char** argv)
     }
   });
 
-  // 4. LẬP KẾ HOẠCH CARTESIAN NỐI TỪ VỊ TRÍ HIỆN TẠI VÀO VÒNG TRÒN
+  // LẬP KẾ HOẠCH CARTESIAN NỐI TỪ VỊ TRÍ HIỆN TẠI VÀO VÒNG TRÒN
   std::vector<geometry_msgs::msg::Pose> toan_bo_quy_dao;
   toan_bo_quy_dao.push_back(danh_sach_hinh_tron.front()); // Lướt 2cm vào mép vòng tròn
   for (const auto& pt : danh_sach_hinh_tron) {
