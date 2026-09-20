@@ -1,0 +1,12 @@
+# Thư mục build và tài liệu tự động sinh ra
+build/
+devel/
+install/
+.catkin_workspace
+
+# File tạm của hệ thống và IDE
+*.user
+*.pyc
+.vscode/
+.idea/
+__pycache__/
