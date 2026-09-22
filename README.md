@@ -23,3 +23,6 @@ source install/setup.bash
 
 # chạy chương trình
 ros2 launch ur_viet_chu khoi_dong_viet_chu.launch.py
+##demo
+<img width="426" height="240" alt="Video Project 4" src="https://github.com/user-attachments/assets/a0c3828c-1980-4aa3-b1cb-1d8d469add35" />
+
